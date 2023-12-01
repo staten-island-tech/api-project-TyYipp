@@ -1,24 +1,20 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
 
-setupCounter(document.querySelector('#counter'))
+const URL = 'https://botw-compendium.herokuapp.com/api/v3/compendium/all';
+async function getData(URL) {
+  try {
+//requesitong a response REST API's
+      const response = await fetch(URL)
+      if (response.status != 200) {
+      throw new Error(response.statusText);
+      }
+      //convert response to json
+      const data = await response.json();
+      document.querySelector("h1").textContent = data.content;
+  } catch (error) {
+      console.log(error, "Uh Oh spagettios")
+      document.querySelector("h1").textContent = '💀Error 404🤖';
+  }
+}
+getData(URL);
