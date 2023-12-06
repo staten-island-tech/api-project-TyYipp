@@ -4,10 +4,21 @@ import './style.css'
 
 
 const api = "https://botw-compendium.herokuapp.com/api/v3/compendium/all";
-
-console.log(fetch(api));
-
-
-fetch(api)
+async function getData() {
+try {
+            const response = await fetch(api)
+            const data = await response.json()
+            document.querySelector("h1").textContent = data.content;
+    } catch (error) {
+        console.log(error, "Uh Oh spagettios")
+        document.querySelector("h1").textContent = '💀Error 404🤖';
+    }
+}
+getData();
+/* fetch(api)
     .then((response) => response.json()) 
-    .then((data) => console.log(data.data)); 
+    .then(data => {
+        data.forEach(item => {
+            console.log(item)
+        })
+    }); */
