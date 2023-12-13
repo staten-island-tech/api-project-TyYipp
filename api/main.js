@@ -26,7 +26,7 @@ try {
                       DOMSelectors.parent.insertAdjacentHTML('beforeend', card);
                     });
                     };
-                    insertCards()
+                    insertCards(data)
     } catch (error) {
         console.log(error, "Uh Oh spagettios")
         document.querySelector(".stuff").textContent = '💀Error 404🤖';

@@ -34,30 +34,28 @@ body {
 
 #parent {
   font-size: 30px;
-  flex-wrap: wrap;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   gap: 20px;
-  align-content: space-between;
-  align-items: center;
   padding: 20px;
   background-color: var(--primary);
   min-height: 100vh;
 }
 
-
 #child {
   display: flex;
   flex-direction: column;
-  background-color: whitesmoke;
-  border: 2px solid var(--secondary);
+  background-color: black;
+  border: 10px blue;
   width: 300px;
-  height: 500px;
-  box-shadow: 20px 20px 30px var(--fourthary);
+  height: 300px;
+  box-shadow: 20px 20px 30px lightblue;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
   padding: 20px;
+  text-align: center;
 }
 
 
@@ -74,7 +72,7 @@ body {
 #text {
   font-size: 20px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  color: black;
+  color: lightskyblue;
   background-color: transparent;
   text-align: center;
 }
