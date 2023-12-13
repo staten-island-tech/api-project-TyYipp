@@ -1,6 +1,5 @@
 import './style.css'
-//https://botw-compendium.herokuapp.com/api/v3/compendium/all
-//https://www.amiiboapi.com/api/
+
 const DOMSelectors = {
     parent: document.querySelector(".parent")
 }
@@ -10,23 +9,36 @@ try {
     const response = await fetch(api)
     const data = await response.json()
     console.log(data)
-                function insertCards(data) {
-                    DOMSelectors.parent.innerHTML = '';
-                    data.data.forEach((data) => {
-                      let name = data.name;
-                      let img = data.image;
-                      let id = data.id;
-                      const card = `
-                        <div id="child">
-                          <h2 id="text">Name: ${name}</h2>
-                          <img src="${img}" alt="" class="img">
-                          <h3 id="text">Type: ${id}</h3>
-                        </div>
-                      `;
-                      DOMSelectors.parent.insertAdjacentHTML('beforeend', card);
-                    });
-                    };
-                    insertCards(data)
+              function insertCards(data) {
+                  DOMSelectors.parent.innerHTML = '';
+                  const sortid = data.data.sort((a,b) => a.id - b.id);
+                  sortid.forEach((data) => {
+                        let name = data.name;
+                        let img = data.image;
+                        let id = data.id;
+                        const card = `
+                          <div class="child">
+                            <h2 class="text">Name: ${name}</h2>
+                            <img src="${img}" alt="" class="img">
+                            <h3 class="text">Type: ${id}</h3>
+                          </div>
+                        `;
+                        DOMSelectors.parent.insertAdjacentHTML('beforeend', card);
+                      });
+                      };
+                      insertCards(data)
+                      
+                      let buttons = document.querySelectorAll('.btn');
+                        buttons.forEach((btn) =>
+                          btn.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            let type = btn.textContent.toLowerCase();
+                            let newArr = sortid.filter((data) => data.catagory === type);
+                            insertCards(newArr);
+                          })
+                        );
+                        insertCards(data);
+
     } catch (error) {
         console.log(error, "Uh Oh spagettios")
         document.querySelector(".stuff").textContent = '💀Error 404🤖';

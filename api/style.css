@@ -32,22 +32,22 @@ body {
   text-align: center;
 }
 
-#parent {
+.parent {
   font-size: 30px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
   gap: 20px;
   padding: 20px;
   background-color: var(--primary);
   min-height: 100vh;
+  flex-wrap: wrap;
 }
 
-#child {
+.child {
   display: flex;
   flex-direction: column;
   background-color: black;
-  border: 10px blue;
+  border: 2px solid lightskyblue;
   width: 300px;
   height: 300px;
   box-shadow: 20px 20px 30px lightblue;
@@ -69,7 +69,7 @@ body {
 }
 
 
-#text {
+.text {
   font-size: 20px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: lightskyblue;
