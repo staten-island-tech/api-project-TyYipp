@@ -31,9 +31,10 @@ try {
                       let buttons = document.querySelectorAll('.btn');
                         buttons.forEach((btn) =>
                           btn.addEventListener('click', function (event) {
+                            DOMSelectors.parent.innerHTML = '';
                             event.preventDefault();
                             let type = btn.textContent.toLowerCase();
-                            let newArr = sortid.filter((data) => data.catagory === type);
+                            let newArr = data.data.filter((data) => data.category === type);
                             insertCards(newArr);
                           })
                         );
