@@ -27,18 +27,6 @@ try {
                       });
                       };
                       insertCards(data)
-                      
-                      let buttons = document.querySelectorAll('.btn');
-                        buttons.forEach((btn) =>
-                          btn.addEventListener('click', function (event) {
-                            DOMSelectors.parent.innerHTML = '';
-                            event.preventDefault();
-                            let type = btn.textContent.toLowerCase();
-                            let newArr = data.data.filter((data) => data.category === type);
-                            insertCards(newArr);
-                          })
-                        );
-                        insertCards(data);
 
     } catch (error) {
         console.log(error, "Uh Oh spagettios")
@@ -48,6 +36,28 @@ try {
 }
 getData(api);
 
+async function filterData() {
+  try {
+      const response = await fetch(api)
+      const data = await response.json()
+      console.log(data)
+                    const sortid = data.data.sort((a,b) => a.id - b.id);
+                      let buttons = document.querySelectorAll('.btn');
+                      buttons.forEach((btn) =>
+                        btn.addEventListener('click', function (event) {
+                          event.preventDefault();
+                          let type = btn.textContent.toLowerCase();
+                          let newArr = sortid.filter((data) => data.category === type);
+                          insertCards(newArr);
+                        })
+                      );
+      } catch (error) {
+          console.log(error, "Uh Oh spagettios")
+          document.querySelector(".stuff").idContent = '💀Error 404🤖';
+  
+      }};
+  filterData(api);
+                      
 /* fetch(api)
     .then((response) => response.json()) 
     .then(data => {
