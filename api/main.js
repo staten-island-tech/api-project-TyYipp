@@ -1,21 +1,5 @@
 import './style.css'
-function insertCards(data) {
-  DOMSelectors.parent.innerHTML = '';
-  const sortid = data.data.sort((a,b) => a.id - b.id);
-  sortid.forEach((data) => {
-        let name = data.name;
-        let img = data.image;
-        let id = data.id;
-        const card = `
-          <div class="child">
-            <h2 class="text">Name: ${name}</h2>
-            <img src="${img}" alt="" class="img">
-            <h3 class="text">Type: ${id}</h3>
-          </div>
-        `;
-        DOMSelectors.parent.insertAdjacentHTML('beforeend', card);
-      });
-      };
+
 const api = "https://botw-compendium.herokuapp.com/api/v3/compendium/all";
 async function getData() {
 try {
@@ -24,7 +8,8 @@ try {
 }
     const response = await fetch(api)
     const data = await response.json()
-    console.log(data)
+    const hi = data.data.forEach((data) => data.category);
+    console.log(hi)
               function insertCards(data) {
                   DOMSelectors.parent.innerHTML = '';
                   const sortid = data.data.sort((a,b) => a.id - b.id);
