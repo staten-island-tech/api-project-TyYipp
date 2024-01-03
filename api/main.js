@@ -12,24 +12,23 @@ const DOMSelectors = {
 function clearfields() {
   DOMSelectors.parent.innerHTML = '';
 }
-
+function insertCards(data){
+  data.forEach((card) => {
+          const all =
+          `<div class="card">
+              <h1 class="text">${card.name}</h1>
+              <img src="${card.image}" class="img">
+              <h4 class="text"> ${card.id}</h4>
+          </div>`
+          DOMSelectors.parent.insertAdjacentHTML("beforeend", all)
+  });
+}
 
 async function getData() {
 try {
     const response = await fetch(api)
     const data = await response.json()
     const sortid = data.data.sort((a,b) => a.id - b.id);
-    function insertCards(data){
-      data.forEach((card) => {
-              const all =
-              `<div class="card">
-                  <h1 class="text">${card.name}</h1>
-                  <img src="${card.image}" class="img">
-                  <h4 class="text"> ${card.id}</h4>
-              </div>`
-              DOMSelectors.parent.insertAdjacentHTML("beforeend", all)
-      });
-  }
   insertCards(sortid)
 
 
@@ -58,26 +57,19 @@ async function search(api) {
   try {
     const response = await fetch(api);
     const data = await response.json();
-    DOMSelectors.search.addEventListener('click', function() {
-      let input = DOMSelectors.input.value;
-      let newArr = data.data.filter((data) => data.name.toLowerCase() === input);
-      console.log(newArr)
-      console.log(input)
-      DOMSelectors.search.addEventListener('click', function (event) {
-  event.preventDefault();
+    let input = DOMSelectors.input.value;
+    let newArr = data.data.filter((data) => data.name.toLowerCase().includes(input));
+    DOMSelectors.search.addEventListener('click', function(event) {
+      event.preventDefault();
       clearfields();
-      if (newArr[length] != 1) {
+      if (newArr.length > 1) {
+        console.log(newArr)
           insertCards(newArr);
         } else {
           document.querySelector("h1").textContent = "Error 🤓🤓🤓"
         }});
-    });
   } catch (error) {
     console.error(error);
-  }
-}
-search(api)
-
-
-
+  }};
+search(api);
 
