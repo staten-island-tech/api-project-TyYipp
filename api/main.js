@@ -18,7 +18,7 @@ function insertCards(data){
           const all =
           `<div class="card">
               <h1 class="text">${card.name}</h1>
-              <img src="${card.image}" class="img">
+              <img src="${card.image}" class="img" alt="${card.image}">
               <h4 class="text"> ${card.id}</h4>
           </div>`
           DOMSelectors.parent.insertAdjacentHTML("beforeend", all)
