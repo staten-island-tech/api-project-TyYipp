@@ -7,14 +7,17 @@ html,
   background-color: black;
 }
 
+#home {
+  background-color: lightskyblue;
+}
 
 #search {
-  background-color: blue;
+  background-color: lightskyblue;
 }
 
 
 #input {
-  color: blue;
+  color: lightskyblue;
 }
 
 
@@ -24,7 +27,8 @@ body {
 }
 
 
-#box {
+
+#box, #box2 {
   font-size: 30px;
   flex-wrap: wrap;
   display: flex;

@@ -8,6 +8,7 @@ const DOMSelectors = {
   parent: document.querySelector(".parent"),
   search: document.querySelector("#search"),
   input: document.querySelector("#input"),
+  home: document.querySelector("#home"),
 }
 function clearfields() {
   DOMSelectors.parent.innerHTML = '';
@@ -41,6 +42,11 @@ btn.addEventListener('click', function (event) {
   let newArr = data.data.filter((data) => data.category.toLowerCase() === type);
   insertCards(newArr);
   console.log(newArr)
+DOMSelectors.home.addEventListener('click', function (event) {
+  event.preventDefault()
+  clearfields();
+  insertCards(sortid)
+})
 }));
 } catch (error) {
 console.log(error, "Uh Oh spagettios")
@@ -57,12 +63,12 @@ async function search(api) {
   try {
     const response = await fetch(api);
     const data = await response.json();
-    let input = DOMSelectors.input.value;
-    let newArr = data.data.filter((data) => data.name.toLowerCase().includes(input));
     DOMSelectors.search.addEventListener('click', function(event) {
       event.preventDefault();
+      let input = DOMSelectors.input.value;
+      let newArr = data.data.filter((data) => data.name.toLowerCase().includes(input));
       clearfields();
-      if (newArr.length > 1) {
+      if (newArr.length > 0) {
         console.log(newArr)
           insertCards(newArr);
         } else {
