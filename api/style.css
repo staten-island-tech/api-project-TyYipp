@@ -6,25 +6,25 @@ html,
   box-sizing: border-box;
   background-color: black;
 }
+h1 {
+color: lightskyblue;
+}
 
-#home {
+
+#home, #search, #input, #sort{
   background-color: lightskyblue;
 }
 
-#search {
-  background-color: lightskyblue;
-}
 
-
-#input {
-  color: lightskyblue;
-}
 
 
 body {
   background-color: black;
   margin: 0;
 }
+
+
+
 
 
 
@@ -39,7 +39,11 @@ body {
   background-color: black;
 
 
+
+
 }
+
+
 
 
 .title {
@@ -48,6 +52,8 @@ body {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   text-align: center;
 }
+
+
 
 
 .parent {
@@ -60,6 +66,8 @@ body {
   min-height: 100vh;
   flex-wrap: wrap;
 }
+
+
 
 
 .child {
@@ -80,6 +88,10 @@ body {
 
 
 
+
+
+
+
 .img {
   height: 198px;
   width: 198px;
@@ -87,12 +99,17 @@ body {
   background-color: whitesmoke;
   border: 2px solid var(--secondary);
   border-radius: 20px;
+  cursor: pointer;
 }
 
 
 
 
-.text {
+
+
+
+
+.text, .textd{
   font-size: 20px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: lightskyblue;
@@ -100,4 +117,17 @@ body {
   text-align: center;
 }
 
- 
+
+.textz, .texty, .textx {
+  font-size: 0.1px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: lightskyblue;
+  background-color: transparent;
+  text-align: center;
+}
+
+
+
+
+
+
