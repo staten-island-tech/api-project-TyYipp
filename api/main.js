@@ -21,7 +21,6 @@ function clearfields() {
 function insertCards(data){
   data.forEach((card) => {
           const all =
-          //<img src="${card.image}" class="img" alt="${card.image}">
           `<div class="card">
               <h1 class="text">${card.name}</h1>
               <img src="${card.image}" class="img" alt="${card.image}">
@@ -185,16 +184,32 @@ home(api)
 
 
 
-function toggle() {
-  DOMSelectors.search.addEventListener('click', function(event) {
+async function toggle(api) {
+  try {
+  const response = await fetch(api);
+  const data = await response.json()
+  const sortid = data.data.sort((a, b) => a.id - b.id);
+  const sortalp = data.data.sort(function (a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+  DOMSelectors.sort.addEventListener('click', function(event) {
     event.preventDefault();
     clearfields
   if (counter[0] = 1)
-  counter.splice(0, 1, 0)
   insertCards(sortid)
+  counter.splice(0, 1, 0)
   if (counter[0] = 0)
-  counter.splice(0, 1, 1)
   insertCards(sortalp)
-})};
-
+  counter.splice(0, 1, 1)
+  })
+  } catch {
+    document.querySelector("h1").textContent = "Error 🤓🤓🤓";
+  }
+}
 
