@@ -12,7 +12,7 @@ const DOMSelectors = {
   search: document.querySelector("#search"),
   input: document.querySelector("#input"),
   home: document.querySelector("#home"),
-  sort: document.querySelector("#sort"),
+  sortid: document.querySelector("#sortid"),
 }
 function clearfields() {
   DOMSelectors.parent.innerHTML = '';
@@ -32,17 +32,6 @@ function insertCards(data){
           DOMSelectors.parent.insertAdjacentHTML("beforeend", all)
   });
 }
-/* 
-const sortalp = data.data.sort(function (a, b) {
-  if (a.name < b.name) {
-    return -1;
-  }
-  if (a.name > b.name) {
-    return 1;
-  }
-  return 0;
-}); */
-
 
 
 
@@ -53,6 +42,9 @@ const sortalp = data.data.sort(function (a, b) {
 async function getData() {
   try {
     const response = await fetch(api);
+    if (response.status != 200) {
+      throw new Error(response.statusText);
+      }
     const data = await response.json();
     const sortid = data.data.sort((a, b) => a.id - b.id);
 
@@ -99,7 +91,11 @@ getData(api);
 
 async function search(api) {
   try {
+    
     const response = await fetch(api);
+    if (response.status != 200) {
+      throw new Error(response.statusText);
+      }
     const data = await response.json();
     DOMSelectors.search.addEventListener('click', function(event) {
       event.preventDefault();
@@ -167,6 +163,9 @@ function imgclick(clickcard) {
 async function home(api) {
   try {
     const response = await fetch(api);
+    if (response.status != 200) {
+      throw new Error(response.statusText);
+      }
     const data = await response.json();
     const sortid = data.data.sort((a,b) => a.id - b.id);
     DOMSelectors.home.addEventListener('click', function (event) {
@@ -182,33 +181,35 @@ async function home(api) {
 home(api)
 
 
-/* 
-async function toggle(api) {
+async function sort(api) {
   try {
-  const response = await fetch(api);
-  const data = await response.json()
-  const sortid = data.data.sort((a, b) => a.id - b.id);
-  const sortalp = data.data.sort(function (a, b) {
-    if (a.name < b.name) {
-      return -1;
-    }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  });
-  DOMSelectors.sort.addEventListener('click', function(event) {
-    event.preventDefault();
-    clearfields();
-  if (counter[0] === 1)
-  insertCards(sortid)
-  counter.splice(0, 1, 0)
-  if (counter[0] === 0)
-  insertCards(sortalp)
-  counter.splice(0, 1, 1)
-  })
-  } catch {
-    document.querySelector("h1").textContent = "Error 🤓🤓🤓";
+    const response = await fetch(api);
+    if (response.status != 200) {
+      throw new Error(response.statusText);
+      }
+    const data = await response.json();
+    const sortid = data.data.sort((a,b) => a.id - b.id);
+    const sortalp = data.data.sort(function (a, b) {
+  if (a.name < b.name) {
+    return -1;
   }
-} */
-
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
+}); 
+DOMSelectors.sortid.addEventListener('click', function (event) {
+  event.preventDefault()
+  clearfields();
+  insertCards(sortid)
+  expand(api);
+DOMSelectors.sortalp.addEventListener('click', function (event) {
+    event.preventDefault()
+    clearfields();
+    insertCards(sortalp)
+    expand(api);
+})})
+} catch {
+  document.querySelector("h1").textContent = "Error 🤓🤓🤓";
+}
+};
