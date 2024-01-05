@@ -63,7 +63,7 @@ async function getData() {
         let newArr = data.data.filter((data) => data.category.toLowerCase() === type);
         insertCards(newArr);
         expand(api);
-        toggle(api);
+        sort(api);
        
       });
     });
@@ -105,6 +105,7 @@ async function search(api) {
       if (newArr.length > 0) {
         console.log(newArr)
           insertCards(newArr);
+          expand(newArr)
         } else {
           document.querySelector("h1").textContent = "Error 🤓🤓🤓"
         }});
@@ -150,7 +151,7 @@ function imgclick(clickcard) {
   const xstyle = clickcard.querySelector('.textx');
   xstyle.style.fontSize= '25px';
   const dstyle = clickcard.querySelector('.textd');
-  dstyle.style.fontSize= '40px';
+  dstyle.style.fontSize= '0.000001px';
 }};
 
 
@@ -180,36 +181,3 @@ async function home(api) {
 }
 home(api)
 
-
-async function sort(api) {
-  try {
-    const response = await fetch(api);
-    if (response.status != 200) {
-      throw new Error(response.statusText);
-      }
-    const data = await response.json();
-    const sortid = data.data.sort((a,b) => a.id - b.id);
-    const sortalp = data.data.sort(function (a, b) {
-  if (a.name < b.name) {
-    return -1;
-  }
-  if (a.name > b.name) {
-    return 1;
-  }
-  return 0;
-}); 
-DOMSelectors.sortid.addEventListener('click', function (event) {
-  event.preventDefault()
-  clearfields();
-  insertCards(sortid)
-  expand(api);
-DOMSelectors.sortalp.addEventListener('click', function (event) {
-    event.preventDefault()
-    clearfields();
-    insertCards(sortalp)
-    expand(api);
-})})
-} catch {
-  document.querySelector("h1").textContent = "Error 🤓🤓🤓";
-}
-};
